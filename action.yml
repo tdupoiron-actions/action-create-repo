@@ -1,5 +1,8 @@
 name: 'Create GitHub Repository'
 description: 'Creates a new GitHub repository in an organization'
+branding:
+  icon: 'repo'
+  color: 'blue'
 inputs:
   repo-owner:
     description: 'The organization where the repository will be created'
