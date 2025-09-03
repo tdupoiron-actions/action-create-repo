@@ -1,0 +1,41 @@
+name: Test Create Repository Action
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo-name:
+        description: 'Name of the repository to create'
+        required: true
+        type: string
+      repo-visibility:
+        description: 'Repository visibility'
+        required: true
+        type: choice
+        default: 'private'
+        options:
+          - private
+          - public
+          - internal
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Test Create Repository Action
+        id: create-repo
+        uses: ./
+        with:
+          repo-owner: ${{ github.repository_owner }}
+          repo-name: ${{ github.event.inputs.repo-name }}
+          repo-visibility: ${{ github.event.inputs.repo-visibility }}
+          github-token: ${{ secrets.REPO_CREATOR_TOKEN }}
+
+      - name: Check outputs
+        run: |
+          echo "Repository Full Name: ${{ steps.create-repo.outputs.repo-full-name }}"
+          echo "Repository URL: ${{ steps.create-repo.outputs.repo-url }}"
+          echo "Repository ID: ${{ steps.create-repo.outputs.repo-id }}"
+          echo "Status: ${{ steps.create-repo.outputs.status }}"

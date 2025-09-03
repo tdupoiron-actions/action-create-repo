@@ -1,0 +1,30 @@
+name: 'Create GitHub Repository'
+description: 'Creates a new GitHub repository in an organization'
+inputs:
+  repo-owner:
+    description: 'The organization where the repository will be created'
+    required: true
+  repo-name:
+    description: 'The name of the repository to create'
+    required: true
+  repo-visibility:
+    description: 'The visibility of the repository (private/public)'
+    required: false
+    default: 'private'
+  github-token:
+    description: 'GitHub token with permissions to create repositories'
+    required: true
+outputs:
+  repo-full-name:
+    description: 'The full name of the created repository (owner/name)'
+  repo-url:
+    description: 'The URL of the created repository'
+  repo-id:
+    description: 'The ID of the created repository'
+  status:
+    description: 'The status of the operation (success/failure)'
+  error:
+    description: 'Error message if the operation failed'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
