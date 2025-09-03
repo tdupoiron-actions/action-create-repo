@@ -31,7 +31,7 @@ jobs:
           repo-owner: ${{ github.repository_owner }}
           repo-name: ${{ github.event.inputs.repo-name }}
           repo-visibility: ${{ github.event.inputs.repo-visibility }}
-          github-token: ${{ secrets.REPO_CREATOR_TOKEN }}
+          github-token: ${{ secrets.REPO_OPS_TOKEN }}
 
       - name: Check outputs
         run: |
